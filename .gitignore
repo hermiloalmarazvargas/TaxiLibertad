@@ -1,0 +1,66 @@
+# ── Secretos y entornos ──────────────────────────────
+.env
+.env.*
+!.env.example
+*.pem
+*.keystore
+*.jks
+key.properties
+google-services.json
+GoogleService-Info.plist
+service-account*.json
+
+# ── Sistema / editores ───────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+*.iml
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# ── Node / panel (React + Vite) ──────────────────────
+node_modules/
+dist/
+dist-ssr/
+*.local
+.vite/
+coverage/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.tsbuildinfo
+
+# ── Supabase ─────────────────────────────────────────
+supabase/.branches/
+supabase/.temp/
+supabase/.env
+supabase/functions/.env
+supabase/functions/**/.env
+
+# ── Flutter / Dart ───────────────────────────────────
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+.flutter-plugins
+.flutter-plugins-dependencies
+build/
+**/generated_plugin_registrant.*
+**/android/.gradle/
+**/android/captures/
+**/android/local.properties
+**/android/app/debug/
+**/android/app/profile/
+**/android/app/release/
+**/ios/Pods/
+**/ios/.symlinks/
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/flutter_export_environment.sh
+**/ios/Flutter/ephemeral/
+**/linux/flutter/ephemeral/
+**/windows/flutter/ephemeral/
+**/macos/Flutter/ephemeral/
+*.g.dart.bak
