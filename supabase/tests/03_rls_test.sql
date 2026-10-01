@@ -57,8 +57,7 @@ insert into public.viajes (id, canal, pasajero_id, origen, estado, sitio_id, con
   ('00000000-0000-0000-0000-00000000aa03', 'app', pg_temp.uid('e2'), public.punto(16.329, -96.596),
    'completado', pg_temp.sitio('B'), pg_temp.uid('c3'), pg_temp.unidad('RLS0003'));
 
-insert into public.viaje_eventos (viaje_id, estado_nuevo)
-select id, estado from public.viajes where id::text like '00000000-0000-0000-0000-00000000aa0%';
+-- (La bitácora viaje_eventos la llena un trigger al insertar los viajes.)
 
 insert into public.ofertas_viaje (viaje_id, conductor_id)
 values ('00000000-0000-0000-0000-00000000aa01', pg_temp.uid('c3'));
@@ -76,6 +75,12 @@ begin
   perform set_config('request.jwt.claims', v_claims::text, true);
   perform set_config('role', 'authenticated', true);
 end;
+$$;
+
+-- Viajes de esta prueba visibles para el usuario actual (ignora otros datos
+-- que haya en la base local, p. ej. de pruebas manuales).
+create function pg_temp.viajes_de_prueba() returns bigint language sql as $$
+  select count(*) from public.viajes where id::text like '00000000-0000-0000-0000-00000000aa0%'
 $$;
 
 create function pg_temp.cuantos(p_tabla text) returns bigint language plpgsql as $$
@@ -112,7 +117,7 @@ select is(pg_temp.cuantos('perfiles'), 1::bigint, 'Conductor: ve solo su perfil'
 select is(pg_temp.cuantos('ofertas_viaje'), 0::bigint, 'Conductor: no ve ofertas de otros');
 select lives_ok(
   $$ update public.conductor_estado
-     set ubicacion = public.punto(16.33, -96.59), rumbo = 10, ubicacion_en = now()
+     set ubicacion = public.punto(16.33, -96.59), rumbo = 10
      where conductor_id = auth.uid() $$,
   'Conductor: reporta su ubicación');
 select throws_ok(
@@ -132,7 +137,7 @@ select is(pg_temp.cuantos('viajes'), 1::bigint, 'Conductor: una oferta no le da 
 
 -- ── Despachador del sitio A ─────────────────────────────────────────
 select pg_temp.como('d1');
-select is(pg_temp.cuantos('viajes'), 2::bigint, 'Despacho de sitio: ve viajes de su sitio y los que buscan conductor');
+select is(pg_temp.viajes_de_prueba(), 2::bigint, 'Despacho de sitio: ve viajes de su sitio y los que buscan conductor');
 select is(pg_temp.cuantos('conductores'), 2::bigint, 'Despacho de sitio: ve solo conductores de su sitio');
 select is(pg_temp.cuantos('conductor_estado'), 2::bigint, 'Despacho de sitio: ve estado solo de su sitio');
 select is(pg_temp.cuantos('unidades'), 2::bigint, 'Despacho de sitio: ve solo unidades de su sitio');
@@ -149,8 +154,8 @@ select throws_ok(
 
 -- ── Despacho central ────────────────────────────────────────────────
 select pg_temp.como('d0');
-select is(pg_temp.cuantos('viajes'), 3::bigint, 'Despacho central: ve todos los viajes');
-select is(pg_temp.cuantos('conductor_estado'), 3::bigint, 'Despacho central: ve a todos los conductores');
+select is(pg_temp.viajes_de_prueba(), 3::bigint, 'Despacho central: ve todos los viajes');
+select is((select count(*) from public.conductor_estado where conductor_id in (pg_temp.uid('c1'), pg_temp.uid('c2'), pg_temp.uid('c3'))), 3::bigint, 'Despacho central: ve a todos los conductores');
 
 -- ── Admin ───────────────────────────────────────────────────────────
 select pg_temp.como('a0');

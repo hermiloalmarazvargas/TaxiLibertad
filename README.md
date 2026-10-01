@@ -38,6 +38,26 @@ npm run usuario:crear -- --rol conductor --usuario juan.perez --nombre "Juan Pé
 
 # Prueba de punta a punta del inicio de sesión (solo local)
 npm run probar:auth
+
+# Prueba de punta a punta de un viaje: Realtime + cron de 20 s (~30 s, solo local)
+npm run probar:viaje
+```
+
+## Panel de despacho
+
+```bash
+cd panel
+cp .env.example .env.local   # llénalo con los valores de `npx supabase status`
+npm install
+npm run dev                  # http://localhost:5173
+```
+
+Si cambia el esquema de la base: `npm run gen:tipos` (desde la raíz) regenera
+`panel/src/types/database.ts`.
+
+```bash
+# Prueba de la Edge Function de alta de conductores (solo local)
+npm run probar:alta
 ```
 
 Los pasajeros no tienen cuenta con contraseña: entran de forma anónima y se

@@ -8,7 +8,10 @@
     "db:status": "supabase status",
     "usuario:crear": "node --env-file=.env scripts/crear-usuario.mjs",
     "probar:auth": "node --env-file=.env scripts/probar-auth.mjs",
-    "test:db": "supabase test db"
+    "test:db": "supabase test db",
+    "probar:viaje": "node --env-file=.env scripts/probar-viaje.mjs",
+    "probar:alta": "node --env-file=.env scripts/probar-alta-conductor.mjs",
+    "gen:tipos": "supabase gen types typescript --local > panel/src/types/database.ts"
   },
   "devDependencies": {
     "@supabase/supabase-js": "^2.117.2",

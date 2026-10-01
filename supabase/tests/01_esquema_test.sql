@@ -77,7 +77,7 @@ insert into public.perfiles (id, rol, nombre, usuario) values
 insert into public.conductores (perfil_id, sitio_id)
 select p.id, s.id
 from public.perfiles p, public.sitios s
-where p.rol = 'conductor' and s.nombre = 'Sitio Prueba';
+where p.id in ('00000000-0000-0000-0000-0000000000c1', '00000000-0000-0000-0000-0000000000c2') and s.nombre = 'Sitio Prueba';
 
 insert into public.conductor_estado (conductor_id, estado, unidad_id)
 select '00000000-0000-0000-0000-0000000000c1', 'disponible', id

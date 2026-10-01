@@ -1,0 +1,11 @@
+@import 'tailwindcss';
+
+/* Texto un poco más grande que el predeterminado: el panel se usa durante
+   turnos largos y a veces desde laptops con pantallas pequeñas. */
+html {
+  font-size: 17px;
+}
+
+body {
+  @apply bg-slate-100 text-slate-900 antialiased;
+}
