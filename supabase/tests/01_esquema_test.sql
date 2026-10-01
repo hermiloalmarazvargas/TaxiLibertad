@@ -70,11 +70,9 @@ insert into auth.users (id, email) values
   ('00000000-0000-0000-0000-0000000000c2', 'c2@prueba.local'),
   ('00000000-0000-0000-0000-0000000000a1', 'p1@prueba.local');
 
--- on conflict: en el paso 2 un trigger creará el perfil automáticamente.
-insert into public.perfiles (id, rol, nombre) values
-  ('00000000-0000-0000-0000-0000000000c1', 'conductor', 'Conductor Uno'),
-  ('00000000-0000-0000-0000-0000000000c2', 'conductor', 'Conductor Dos')
-on conflict (id) do update set rol = excluded.rol, nombre = excluded.nombre;
+insert into public.perfiles (id, rol, nombre, usuario) values
+  ('00000000-0000-0000-0000-0000000000c1', 'conductor', 'Conductor Uno', 'prueba.c1'),
+  ('00000000-0000-0000-0000-0000000000c2', 'conductor', 'Conductor Dos', 'prueba.c2');
 
 insert into public.conductores (perfil_id, sitio_id)
 select p.id, s.id
@@ -102,8 +100,7 @@ select throws_ok(
 
 select throws_ok(
   $$ insert into public.perfiles (id, rol, nombre)
-     values ('00000000-0000-0000-0000-0000000000a1', 'pasajero', 'Pasajero Sin Tel')
-     on conflict (id) do update set rol = excluded.rol, telefono = null $$,
+     values ('00000000-0000-0000-0000-0000000000a1', 'pasajero', 'Pasajero Sin Tel') $$,
   '23514', null,
   'Un pasajero debe tener teléfono'
 );

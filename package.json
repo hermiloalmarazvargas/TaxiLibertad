@@ -5,9 +5,13 @@
     "db:start": "supabase start",
     "db:stop": "supabase stop",
     "db:reset": "supabase db reset",
-    "db:status": "supabase status"
+    "db:status": "supabase status",
+    "usuario:crear": "node --env-file=.env scripts/crear-usuario.mjs",
+    "probar:auth": "node --env-file=.env scripts/probar-auth.mjs",
+    "test:db": "supabase test db"
   },
   "devDependencies": {
+    "@supabase/supabase-js": "^2.117.2",
     "supabase": "^2.119.0"
   }
 }
