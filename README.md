@@ -56,8 +56,11 @@ Si cambia el esquema de la base: `npm run gen:tipos` (desde la raíz) regenera
 `panel/src/types/database.ts`.
 
 ```bash
-# Prueba de la Edge Function de alta de conductores (solo local)
+# Pruebas de las Edge Functions de alta y restablecer contraseña (solo local)
 npm run probar:alta
+
+# Pruebas del panel en Chrome (requiere `npm run dev`; ver panel/e2e/README.md)
+cd panel && npm run e2e
 ```
 
 Los pasajeros no tienen cuenta con contraseña: entran de forma anónima y se

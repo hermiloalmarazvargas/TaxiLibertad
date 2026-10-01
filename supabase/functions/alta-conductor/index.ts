@@ -9,10 +9,9 @@
 // 4xx → { error, codigo }
 import '@supabase/functions-js/edge-runtime.d.ts';
 import { corsHeaders, error, json } from '../_shared/http.ts';
+import { correoDeUsuario, generarPassword } from '../_shared/cuentas.ts';
 import { clienteAdmin, perfilDeQuienLlama } from '../_shared/supabase.ts';
 
-// Debe coincidir con el dominio que usan las apps al iniciar sesión.
-const DOMINIO_USUARIOS = 'usuarios.taxi.internal';
 const USUARIO_VALIDO = /^[a-z0-9][a-z0-9._]{2,29}$/;
 
 type Entrada = {
@@ -43,23 +42,6 @@ function validar(e: Entrada): string[] {
   return errores;
 }
 
-// Sin caracteres que se confunden al dictarlos (0/O, 1/l/I).
-function generarPassword(largo = 10): string {
-  const letras = 'abcdefghjkmnpqrstuvwxyz';
-  const digitos = '23456789';
-  const todos = letras + digitos;
-  const azar = crypto.getRandomValues(new Uint32Array(largo * 2));
-  const chars = Array.from(azar.slice(0, largo), (n) => todos[n % todos.length]);
-  // Garantiza al menos una letra y un dígito (regla de contraseñas de Auth).
-  chars[0] = letras[azar[0] % letras.length];
-  chars[1] = digitos[azar[1] % digitos.length];
-  for (let i = largo - 1; i > 0; i--) {
-    const j = azar[largo + i] % (i + 1);
-    [chars[i], chars[j]] = [chars[j], chars[i]];
-  }
-  return chars.join('');
-}
-
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders });
   if (req.method !== 'POST') return error(405, 'metodo_no_permitido', 'Método no permitido');
@@ -86,7 +68,7 @@ Deno.serve(async (req) => {
   const password = passwordGenerada ? generarPassword() : (entrada.password as string);
 
   const { data: creado, error: errorAuth } = await admin.auth.admin.createUser({
-    email: `${usuario}@${DOMINIO_USUARIOS}`,
+    email: correoDeUsuario(usuario),
     password,
     email_confirm: true,
     // Marca que exige el hook before_user_created para permitir la cuenta.

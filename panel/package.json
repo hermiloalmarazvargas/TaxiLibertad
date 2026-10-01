@@ -7,10 +7,12 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "e2e": "node --env-file=.env.local e2e/sesion.mjs && node --env-file=.env.local e2e/conductores.mjs && node --env-file=.env.local e2e/unidades.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.117.2",
+    "@tanstack/react-query": "^5.104.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-router": "^8.4.0"
@@ -22,6 +24,7 @@
     "@types/react-dom": "^19.2.7",
     "@vitejs/plugin-react": "^6.1.1",
     "oxlint": "^1.81.0",
+    "playwright-core": "^1.63.0",
     "tailwindcss": "^4.3.3",
     "typescript": "~6.0.2",
     "vite": "^8.3.0"

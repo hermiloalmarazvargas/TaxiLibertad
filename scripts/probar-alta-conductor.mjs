@@ -114,6 +114,41 @@ async function main() {
     assert.equal(perfil.telefono, '+529514445566');
   });
 
+  console.log('Restablecer contraseña');
+  const { data: chofer } = await admin.from('perfiles').select('id').eq('usuario', usuario).single();
+  const restablecer = async (cliente, perfilId) => {
+    const { data: { session } } = await cliente.auth.getSession();
+    const res = await fetch(`${url}/functions/v1/restablecer-password`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        apikey: process.env.SUPABASE_PUBLISHABLE_KEY,
+        Authorization: `Bearer ${session.access_token}`,
+      },
+      body: JSON.stringify({ perfil_id: perfilId }),
+    });
+    return { status: res.status, body: await res.json() };
+  };
+
+  await paso('un despachador no puede restablecer → 403', async () => {
+    assert.equal((await restablecer(despacho.cliente, chofer.id)).status, 403);
+  });
+  await paso('no se restablece la contraseña de un admin → 404', async () => {
+    assert.equal((await restablecer(jefe.cliente, jefe.id)).status, 404);
+  });
+  await paso('el admin restablece: la vieja deja de servir y la nueva funciona', async () => {
+    const r = await restablecer(jefe.cliente, chofer.id);
+    assert.equal(r.status, 200, JSON.stringify(r.body));
+    assert.equal(r.body.usuario, usuario);
+    assert.notEqual(r.body.password, password);
+    const vieja = await nuevoCliente().auth.signInWithPassword({ email: correoDeUsuario(usuario), password });
+    assert.ok(vieja.error, 'la contraseña anterior ya no debe servir');
+    const nueva = await nuevoCliente().auth.signInWithPassword({
+      email: correoDeUsuario(usuario), password: r.body.password,
+    });
+    assert.ifError(nueva.error);
+  });
+
   console.log('\nTodo bien ✔');
 }
 

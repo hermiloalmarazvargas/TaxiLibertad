@@ -417,6 +417,9 @@ isOneToOne: false
 "before_user_created_hook":
 { Args: { "event": Json }; Returns: Json
                            },
+"cambiar_activo_conductor":
+{ Args: { "p_activo": boolean,"p_conductor_id": string }; Returns: undefined
+                           },
 "cambiar_disponibilidad":
 { Args: { "p_estado": Database["public"]['Enums']["estado_conductor"],"p_unidad_id"?: number }; Returns: {
               "actualizado_en": string,

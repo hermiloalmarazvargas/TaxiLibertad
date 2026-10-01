@@ -6,8 +6,8 @@ type Seccion = { ruta: string; titulo: string; roles: Rol[] }
 
 const SECCIONES: Seccion[] = [
   { ruta: '/', titulo: 'Viajes', roles: ['despachador', 'admin'] },
-  { ruta: '/conductores', titulo: 'Conductores', roles: ['admin'] },
-  { ruta: '/unidades', titulo: 'Unidades', roles: ['admin'] },
+  { ruta: '/conductores', titulo: 'Conductores', roles: ['despachador', 'admin'] },
+  { ruta: '/unidades', titulo: 'Unidades y sitios', roles: ['admin'] },
   { ruta: '/zonas', titulo: 'Zonas y tarifas', roles: ['admin'] },
   { ruta: '/reportes', titulo: 'Reportes', roles: ['despachador', 'admin'] },
 ]
