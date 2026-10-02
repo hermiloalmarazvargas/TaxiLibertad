@@ -1,0 +1,5 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- Solo en depuración: HTTP sin cifrar hacia Supabase local (127.0.0.1 vía "adb reverse"). -->
+    <application android:usesCleartextTraffic="true"/>
+</manifest>

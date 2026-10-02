@@ -11,7 +11,8 @@
     "test:db": "supabase test db",
     "probar:viaje": "node --env-file=.env scripts/probar-viaje.mjs",
     "probar:alta": "node --env-file=.env scripts/probar-alta-conductor.mjs",
-    "gen:tipos": "supabase gen types typescript --local > panel/src/types/database.ts"
+    "gen:tipos": "supabase gen types typescript --local > panel/src/types/database.ts",
+    "simular:pasajero": "node --env-file=.env scripts/simular-pasajero.mjs"
   },
   "devDependencies": {
     "@supabase/supabase-js": "^2.117.2",

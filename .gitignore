@@ -64,3 +64,6 @@ build/
 **/windows/flutter/ephemeral/
 **/macos/Flutter/ephemeral/
 *.g.dart.bak
+
+# ── Configuración local de las apps (llaves) ─────────
+**/config/local.json

@@ -1,0 +1,5 @@
+{
+  "SUPABASE_URL": "http://127.0.0.1:54321",
+  "SUPABASE_PUBLISHABLE_KEY": "pega aquí la PUBLISHABLE_KEY de `npx supabase status`",
+  "MAPTILER_KEY": "pega aquí una key de MapTiler para apps (ver README)"
+}
