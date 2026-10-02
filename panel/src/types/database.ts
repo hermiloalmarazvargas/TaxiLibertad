@@ -73,6 +73,25 @@ isOneToOne: false
       referencedColumns: ["id"]
     }
                   ]
+                },"configuracion": {
+                  Row: {
+                    "actualizado_en": string,"actualizado_por": string | null,"id": boolean,"recargo_desde": string,"recargo_hasta": string,"recargo_nocturno_pct": number
+                  }
+                  Insert: {
+                    "actualizado_en"?: string,"actualizado_por"?: string | null,"id"?: boolean,"recargo_desde"?: string,"recargo_hasta"?: string,"recargo_nocturno_pct"?: number
+                  }
+                  Update: {
+                    "actualizado_en"?: string,"actualizado_por"?: string | null,"id"?: boolean,"recargo_desde"?: string,"recargo_hasta"?: string,"recargo_nocturno_pct"?: number
+                  }
+                  Relationships: [
+                    {
+      foreignKeyName: "configuracion_actualizado_por_fkey"
+      columns: ["actualizado_por"]
+isOneToOne: false
+      referencedRelation: "perfiles"
+      referencedColumns: ["id"]
+    }
+                  ]
                 },"dispositivos": {
                   Row: {
                     "actualizado_en": string,"fcm_token": string,"id": number,"perfil_id": string,"plataforma": string
@@ -258,13 +277,13 @@ isOneToOne: false
                   ]
                 },"viajes": {
                   Row: {
-                    "asignado_en": string | null,"canal": Database["public"]['Enums']["canal_viaje"],"cancelado_en": string | null,"cancelado_por": string | null,"client_request_id": string | null,"conductor_id": string | null,"contacto_nombre": string | null,"contacto_telefono": string | null,"creado_por": string | null,"destino": unknown,"destino_lat": number | null,"destino_lng": number | null,"destino_referencia": string | null,"estado": Database["public"]['Enums']["estado_viaje"],"id": string,"iniciado_en": string | null,"llego_en": string | null,"motivo_cancelacion": string | null,"origen": unknown,"origen_lat": number | null,"origen_lng": number | null,"origen_referencia": string | null,"pasajero_id": string | null,"sitio_id": number | null,"solicitado_en": string,"tarifa_monto": number | null,"terminado_en": string | null,"unidad_id": number | null,"zona_destino_id": number | null,"zona_origen_id": number | null
+                    "asignado_en": string | null,"canal": Database["public"]['Enums']["canal_viaje"],"cancelado_en": string | null,"cancelado_por": string | null,"client_request_id": string | null,"conductor_id": string | null,"contacto_nombre": string | null,"contacto_telefono": string | null,"creado_por": string | null,"destino": unknown,"destino_lat": number | null,"destino_lng": number | null,"destino_referencia": string | null,"estado": Database["public"]['Enums']["estado_viaje"],"id": string,"iniciado_en": string | null,"llego_en": string | null,"motivo_cancelacion": string | null,"origen": unknown,"origen_lat": number | null,"origen_lng": number | null,"origen_referencia": string | null,"pasajero_id": string | null,"sitio_id": number | null,"solicitado_en": string,"tarifa_monto": number | null,"tarifa_recargo": number | null,"terminado_en": string | null,"unidad_id": number | null,"zona_destino_id": number | null,"zona_origen_id": number | null
                   }
                   Insert: {
-                    "asignado_en"?: string | null,"canal": Database["public"]['Enums']["canal_viaje"],"cancelado_en"?: string | null,"cancelado_por"?: string | null,"client_request_id"?: string | null,"conductor_id"?: string | null,"contacto_nombre"?: string | null,"contacto_telefono"?: string | null,"creado_por"?: string | null,"destino"?: unknown,"destino_lat"?: never,"destino_lng"?: never,"destino_referencia"?: string | null,"estado"?: Database["public"]['Enums']["estado_viaje"],"id"?: string,"iniciado_en"?: string | null,"llego_en"?: string | null,"motivo_cancelacion"?: string | null,"origen": unknown,"origen_lat"?: never,"origen_lng"?: never,"origen_referencia"?: string | null,"pasajero_id"?: string | null,"sitio_id"?: number | null,"solicitado_en"?: string,"tarifa_monto"?: number | null,"terminado_en"?: string | null,"unidad_id"?: number | null,"zona_destino_id"?: number | null,"zona_origen_id"?: number | null
+                    "asignado_en"?: string | null,"canal": Database["public"]['Enums']["canal_viaje"],"cancelado_en"?: string | null,"cancelado_por"?: string | null,"client_request_id"?: string | null,"conductor_id"?: string | null,"contacto_nombre"?: string | null,"contacto_telefono"?: string | null,"creado_por"?: string | null,"destino"?: unknown,"destino_lat"?: never,"destino_lng"?: never,"destino_referencia"?: string | null,"estado"?: Database["public"]['Enums']["estado_viaje"],"id"?: string,"iniciado_en"?: string | null,"llego_en"?: string | null,"motivo_cancelacion"?: string | null,"origen": unknown,"origen_lat"?: never,"origen_lng"?: never,"origen_referencia"?: string | null,"pasajero_id"?: string | null,"sitio_id"?: number | null,"solicitado_en"?: string,"tarifa_monto"?: number | null,"tarifa_recargo"?: number | null,"terminado_en"?: string | null,"unidad_id"?: number | null,"zona_destino_id"?: number | null,"zona_origen_id"?: number | null
                   }
                   Update: {
-                    "asignado_en"?: string | null,"canal"?: Database["public"]['Enums']["canal_viaje"],"cancelado_en"?: string | null,"cancelado_por"?: string | null,"client_request_id"?: string | null,"conductor_id"?: string | null,"contacto_nombre"?: string | null,"contacto_telefono"?: string | null,"creado_por"?: string | null,"destino"?: unknown,"destino_lat"?: never,"destino_lng"?: never,"destino_referencia"?: string | null,"estado"?: Database["public"]['Enums']["estado_viaje"],"id"?: string,"iniciado_en"?: string | null,"llego_en"?: string | null,"motivo_cancelacion"?: string | null,"origen"?: unknown,"origen_lat"?: never,"origen_lng"?: never,"origen_referencia"?: string | null,"pasajero_id"?: string | null,"sitio_id"?: number | null,"solicitado_en"?: string,"tarifa_monto"?: number | null,"terminado_en"?: string | null,"unidad_id"?: number | null,"zona_destino_id"?: number | null,"zona_origen_id"?: number | null
+                    "asignado_en"?: string | null,"canal"?: Database["public"]['Enums']["canal_viaje"],"cancelado_en"?: string | null,"cancelado_por"?: string | null,"client_request_id"?: string | null,"conductor_id"?: string | null,"contacto_nombre"?: string | null,"contacto_telefono"?: string | null,"creado_por"?: string | null,"destino"?: unknown,"destino_lat"?: never,"destino_lng"?: never,"destino_referencia"?: string | null,"estado"?: Database["public"]['Enums']["estado_viaje"],"id"?: string,"iniciado_en"?: string | null,"llego_en"?: string | null,"motivo_cancelacion"?: string | null,"origen"?: unknown,"origen_lat"?: never,"origen_lng"?: never,"origen_referencia"?: string | null,"pasajero_id"?: string | null,"sitio_id"?: number | null,"solicitado_en"?: string,"tarifa_monto"?: number | null,"tarifa_recargo"?: number | null,"terminado_en"?: string | null,"unidad_id"?: number | null,"zona_destino_id"?: number | null,"zona_origen_id"?: number | null
                   }
                   Relationships: [
                     {
@@ -364,6 +383,7 @@ isOneToOne: false
 "sitio_id": number | null,
 "solicitado_en": string,
 "tarifa_monto": number | null,
+"tarifa_recargo": number | null,
 "terminado_en": string | null,
 "unidad_id": number | null,
 "zona_destino_id": number | null,
@@ -403,6 +423,7 @@ isOneToOne: false
 "sitio_id": number | null,
 "solicitado_en": string,
 "tarifa_monto": number | null,
+"tarifa_recargo": number | null,
 "terminado_en": string | null,
 "unidad_id": number | null,
 "zona_destino_id": number | null,
@@ -470,6 +491,7 @@ isOneToOne: false
 "sitio_id": number | null,
 "solicitado_en": string,
 "tarifa_monto": number | null,
+"tarifa_recargo": number | null,
 "terminado_en": string | null,
 "unidad_id": number | null,
 "zona_destino_id": number | null,
@@ -512,6 +534,7 @@ isOneToOne: false
 "sitio_id": number | null,
 "solicitado_en": string,
 "tarifa_monto": number | null,
+"tarifa_recargo": number | null,
 "terminado_en": string | null,
 "unidad_id": number | null,
 "zona_destino_id": number | null,
@@ -532,6 +555,21 @@ isOneToOne: false
 "es_staff":
 { Args: Record<PropertyKey, never>; Returns: boolean
                            },
+"guardar_zona":
+{ Args: { "p_color": string,"p_geojson": Json,"p_id"?: number,"p_nombre": string }; Returns: {
+              "activa": boolean,
+"color": string,
+"creado_en": string,
+"id": number,
+"nombre": string,
+"poligono": unknown
+            }
+                          SetofOptions: {
+        from: "*"
+        to: "zonas"
+        isOneToOne: true
+        isSetofReturn: false
+      } },
 "mi_oferta_pendiente":
 { Args: Record<PropertyKey, never>; Returns: {
               "destino_lat": number,"destino_lng": number,"destino_referencia": string,"distancia_m": number,"oferta_id": number,"origen_lat": number,"origen_lng": number,"origen_referencia": string,"segundos_restantes": number,"tarifa_monto": number,"viaje_id": string,"zona_destino": string,"zona_origen": string
@@ -574,6 +612,16 @@ isOneToOne: false
         isOneToOne: true
         isSetofReturn: false
       } },
+"reporte_por_conductor":
+{ Args: { "p_desde": string,"p_hasta": string }; Returns: {
+              "a_convenir": number,"aceptadas": number,"activo": boolean,"completados": number,"conductor_id": string,"ingresos": number,"nombre": string,"ofertas": number,"rechazadas": number,"sitio": string,"soltados": number,"vencidas": number
+            }[]
+                           },
+"reporte_por_dia":
+{ Args: { "p_desde": string,"p_hasta": string }; Returns: {
+              "a_convenir": number,"cancelados": number,"cancelados_pasajero": number,"completados": number,"fecha": string,"ingresos": number,"minutos_asignacion": number,"por_telefono": number,"sin_conductor": number,"solicitados": number
+            }[]
+                           },
 "responder_oferta":
 { Args: { "p_aceptar": boolean,"p_oferta_id": number }; Returns: {
               "asignado_en": string | null,
@@ -602,6 +650,7 @@ isOneToOne: false
 "sitio_id": number | null,
 "solicitado_en": string,
 "tarifa_monto": number | null,
+"tarifa_recargo": number | null,
 "terminado_en": string | null,
 "unidad_id": number | null,
 "zona_destino_id": number | null,
@@ -647,6 +696,7 @@ isOneToOne: false
 "sitio_id": number | null,
 "solicitado_en": string,
 "tarifa_monto": number | null,
+"tarifa_recargo": number | null,
 "terminado_en": string | null,
 "unidad_id": number | null,
 "zona_destino_id": number | null,
@@ -659,8 +709,8 @@ isOneToOne: false
         isSetofReturn: false
       } },
 "tarifa_estimada":
-{ Args: { "destino_lat"?: number,"destino_lng"?: number,"origen_lat": number,"origen_lng": number }; Returns: {
-              "monto": number,"zona_destino": string,"zona_destino_id": number,"zona_origen": string,"zona_origen_id": number
+{ Args: { "destino_lat"?: number,"destino_lng"?: number,"momento"?: string,"origen_lat": number,"origen_lng": number }; Returns: {
+              "monto": number,"monto_base": number,"nocturno": boolean,"recargo": number,"zona_destino": string,"zona_destino_id": number,"zona_origen": string,"zona_origen_id": number
             }[]
                            },
 "zona_de":
@@ -668,7 +718,7 @@ isOneToOne: false
                            }
           }
           Enums: {
-            "canal_viaje": "app"|"telefono","estado_conductor": "fuera_de_servicio"|"disponible"|"ocupado","estado_viaje": "buscando"|"asignado"|"conductor_llego"|"en_curso"|"completado"|"cancelado"|"sin_conductor","respuesta_oferta": "pendiente"|"aceptada"|"rechazada"|"expirada","rol_usuario": "pasajero"|"conductor"|"despachador"|"admin"
+            "canal_viaje": "app"|"telefono","estado_conductor": "fuera_de_servicio"|"disponible"|"ocupado","estado_viaje": "buscando"|"asignado"|"conductor_llego"|"en_curso"|"completado"|"cancelado"|"sin_conductor","respuesta_oferta": "pendiente"|"aceptada"|"rechazada"|"expirada"|"soltada","rol_usuario": "pasajero"|"conductor"|"despachador"|"admin"
           }
           CompositeTypes: {
             [_ in never]: never
@@ -788,7 +838,7 @@ export const Constants = {
           }
         },"public": {
           Enums: {
-            "canal_viaje": ["app", "telefono"],"estado_conductor": ["fuera_de_servicio", "disponible", "ocupado"],"estado_viaje": ["buscando", "asignado", "conductor_llego", "en_curso", "completado", "cancelado", "sin_conductor"],"respuesta_oferta": ["pendiente", "aceptada", "rechazada", "expirada"],"rol_usuario": ["pasajero", "conductor", "despachador", "admin"]
+            "canal_viaje": ["app", "telefono"],"estado_conductor": ["fuera_de_servicio", "disponible", "ocupado"],"estado_viaje": ["buscando", "asignado", "conductor_llego", "en_curso", "completado", "cancelado", "sin_conductor"],"respuesta_oferta": ["pendiente", "aceptada", "rechazada", "expirada", "soltada"],"rol_usuario": ["pasajero", "conductor", "despachador", "admin"]
           }
         }
 } as const

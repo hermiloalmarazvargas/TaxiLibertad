@@ -9,6 +9,7 @@ const SECCIONES: Seccion[] = [
   { ruta: '/conductores', titulo: 'Conductores', roles: ['despachador', 'admin'] },
   { ruta: '/unidades', titulo: 'Unidades y sitios', roles: ['admin'] },
   { ruta: '/zonas', titulo: 'Zonas y tarifas', roles: ['admin'] },
+  { ruta: '/bloqueos', titulo: 'Números bloqueados', roles: ['despachador', 'admin'] },
   { ruta: '/reportes', titulo: 'Reportes', roles: ['despachador', 'admin'] },
 ]
 

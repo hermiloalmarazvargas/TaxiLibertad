@@ -2,7 +2,8 @@
 
 Recorren el panel en Chrome (con `playwright-core`) contra Supabase local.
 
-Requisitos, una sola vez (desde la raíz del proyecto):
+Requisitos: `VITE_MAPTILER_KEY` en `panel/.env.local` (para la prueba de zonas) y,
+una sola vez, las cuentas de prueba (desde la raíz del proyecto):
 
 ```bash
 npm run usuario:crear -- --rol admin --usuario admin --nombre "Administrador" --password clave1234

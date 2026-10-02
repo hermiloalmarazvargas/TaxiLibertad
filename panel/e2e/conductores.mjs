@@ -32,7 +32,7 @@ async function entrar(usuario) {
   await page.getByLabel('Usuario').fill(usuario);
   await page.getByLabel('Contraseña').fill('clave1234');
   await page.getByRole('button', { name: 'Entrar' }).click();
-  await page.getByRole('heading', { name: 'Viajes' }).waitFor();
+  await page.getByRole('heading', { name: 'Viajes', exact: true }).waitFor();
 }
 const fila = (u) => page.locator(`[data-prueba="conductor-${u}"]`);
 

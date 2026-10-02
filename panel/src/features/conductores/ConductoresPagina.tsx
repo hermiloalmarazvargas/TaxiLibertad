@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useSesion } from '../../auth/sesion'
 import { MensajeError } from '../../componentes/Avisos'
 import { Boton } from '../../componentes/Boton'
 import { Modal } from '../../componentes/Modal'
 import { mensajeDeError } from '../../lib/errores'
 import { formatoTelefono } from '../../lib/formato'
+import { useAhora } from '../../lib/useAhora'
 import {
   useCambiarActivo,
   useConductores,
@@ -22,16 +23,6 @@ type Dialogo =
   | { tipo: 'cuenta'; titulo: string; cuenta: Omit<CuentaCreada, 'id'> }
   | { tipo: 'restablecer'; conductor: Conductor }
   | { tipo: 'activo'; conductor: Conductor }
-
-// Para que "sin señal" se actualice aunque no lleguen eventos.
-function useAhora(cadaMs: number) {
-  const [ahora, setAhora] = useState(() => Date.now())
-  useEffect(() => {
-    const id = setInterval(() => setAhora(Date.now()), cadaMs)
-    return () => clearInterval(id)
-  }, [cadaMs])
-  return ahora
-}
 
 export function ConductoresPagina() {
   const { usuario } = useSesion()

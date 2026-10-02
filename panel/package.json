@@ -8,17 +8,21 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
-    "e2e": "node --env-file=.env.local e2e/sesion.mjs && node --env-file=.env.local e2e/conductores.mjs && node --env-file=.env.local e2e/unidades.mjs"
+    "e2e": "node --env-file=.env.local e2e/sesion.mjs && node --env-file=.env.local e2e/conductores.mjs && node --env-file=.env.local e2e/unidades.mjs && node --env-file=.env.local e2e/zonas.mjs && node --env-file=.env.local e2e/bloqueos.mjs && node --env-file=.env.local e2e/reportes.mjs && node --env-file=.env.local e2e/viajes.mjs"
   },
   "dependencies": {
+    "@geoman-io/leaflet-geoman-free": "^2.20.2",
     "@supabase/supabase-js": "^2.117.2",
     "@tanstack/react-query": "^5.104.0",
+    "leaflet": "^1.9.4",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
+    "react-leaflet": "^5.0.0",
     "react-router": "^8.4.0"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.3",
+    "@types/leaflet": "^1.9.22",
     "@types/node": "^24.13.3",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",

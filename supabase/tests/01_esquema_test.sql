@@ -18,13 +18,13 @@ where a.nombre = 'Prueba A' and b.nombre = 'Prueba B';
 
 -- ── Tarifas ──
 select is(
-  (select monto from public.tarifa_estimada(0.5, 0.5, 0.5, 1.5)),
+  (select monto_base from public.tarifa_estimada(0.5, 0.5, 0.5, 1.5)),
   50::numeric,
   'A→B usa la tarifa capturada'
 );
 
 select is(
-  (select monto from public.tarifa_estimada(0.5, 1.5, 0.5, 0.5)),
+  (select monto_base from public.tarifa_estimada(0.5, 1.5, 0.5, 0.5)),
   null::numeric,
   'B→A sin tarifa capturada = a convenir (las direcciones son independientes)'
 );
@@ -36,7 +36,7 @@ select is(
 );
 
 select is(
-  (select monto from public.tarifa_estimada(0.5, 0.5)),
+  (select monto_base from public.tarifa_estimada(0.5, 0.5)),
   null::numeric,
   'Sin destino = a convenir'
 );
